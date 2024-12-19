@@ -14,6 +14,7 @@ public class Recursion {
         System.out.println("Factorial value of the given number: " + number + " is: " + result);
 
     }
+
     static int factorial(int num) {
         if (num == 0 || num == 1) {
             return  1;
