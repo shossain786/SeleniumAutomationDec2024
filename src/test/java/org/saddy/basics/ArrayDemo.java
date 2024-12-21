@@ -18,7 +18,7 @@ public class ArrayDemo {
         nums[0] = 7;
         nums[1] = 2;
         System.out.println(Arrays.toString(nums));
-//        for (int i = 0; i< nums.length; i++) {
+//        for (int i = 0; i < nums.length; i++) {
 //            System.out.println(nums[i]);
 //        }
 //        enhanced for loop
@@ -38,6 +38,16 @@ public class ArrayDemo {
         System.out.println("======================");
         System.out.println(Arrays.toString(nums));
         System.out.println(Arrays.toString(nums2));
+        nums3[4] = 34;
+        System.out.println(Arrays.toString(nums3));
+        System.out.println( Arrays.equals(nums, nums3));
+        System.out.println(nums == nums3);
+        System.out.println(nums.length);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>");
+//        for (int i = 0; i <= nums3.length; i++)
+//            System.out.println(nums3[i]);
+//        nums[10] = 33;
+        Arrays.sort(nums3);
         System.out.println(Arrays.toString(nums3));
     }
 }
