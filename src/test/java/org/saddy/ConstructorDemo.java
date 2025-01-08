@@ -7,10 +7,11 @@ public class ConstructorDemo {
 //        A obj = new A(33 , 30);
 //        A obj1 = new A();
 
-        ConstructorDemo constructorDemo = new ConstructorDemo();
-        System.out.println(constructorDemo.number);
+//        ConstructorDemo constructorDemo = new ConstructorDemo();
+//        System.out.println(constructorDemo.number);
 
 //        obj.method1();
+        A a = new A(10, 6, "sum");
     }
 }
 
@@ -18,6 +19,13 @@ public class ConstructorDemo {
 class A {
     public A(){
         System.out.println("Constructor called");
+    }
+    int num, num1;
+
+    public A(int num, int num1, String operation) {
+        this.num = num;  //this ->A obj =  new A();
+        this.num1 = num1;
+        this.method1();
     }
 
     public A(int num) {
