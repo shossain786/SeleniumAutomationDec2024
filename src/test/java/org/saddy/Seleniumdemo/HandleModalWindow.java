@@ -7,9 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
-import java.util.List;
 
-public class HandlingDropDown {
+public class HandleModalWindow {
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -23,26 +22,29 @@ public class HandlingDropDown {
         driver.findElement(By.xpath("//button")).click();
         sleeptime(3);
 
-        WebElement automationType = driver.findElement(By.xpath("//select[@id='automationType']"));
+        driver.findElement(By.xpath("//button[.='Open Modal']")).click();
+        String title = driver.findElement(By.xpath("//h2[.='Modal Window']")).getText();
+        System.out.println("Title of the Modal Window: " + title);
 
-        Select select = new Select(automationType);
-        System.out.println("By Default Selected Value: " + select.getFirstSelectedOption().getText());
-//        select.selectByIndex(2);
-//        select.selectByValue("Regression");
-        select.selectByVisibleText("Performance Testing");
-//        select.selectByContainsVisibleText("ance Tes");
+        driver.findElement(By.id("modalInputText")).sendKeys("Testing Modal window");
+        WebElement checkBox = driver.findElement(By.xpath("//input[@id='modalCheckbox']"));
 
-        System.out.println("Data Selected: " + select.getFirstSelectedOption().getText());
+        System.out.println("By Default Status of the check box: " + checkBox.isSelected());
 
-        List<WebElement> dropdownValue = select.getOptions();
+        checkBox.click();
+        System.out.println("Post clicking Status of the check box: " + checkBox.isSelected());
 
-        for (WebElement element : dropdownValue) {
-            System.out.println(element.getText());
-        }
-        select.isMultiple();
 
-        sleeptime(2);
+        Select skillDropDown = new Select(driver.findElement(By.xpath("//select[@id='modalSelect']")));
+        skillDropDown.selectByVisibleText("Selenium");
+
+        sleeptime(3);
+
+        driver.findElement(By.xpath("//span[.='×']")).click();
+        sleeptime(3);
+
         driver.quit();
+
     }
 
     static void sleeptime(int sec) {

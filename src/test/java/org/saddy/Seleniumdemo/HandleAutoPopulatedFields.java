@@ -4,12 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 import java.util.List;
 
-public class HandlingDropDown {
+public class HandleAutoPopulatedFields {
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -23,27 +22,29 @@ public class HandlingDropDown {
         driver.findElement(By.xpath("//button")).click();
         sleeptime(3);
 
-        WebElement automationType = driver.findElement(By.xpath("//select[@id='automationType']"));
+        driver.findElement(By.xpath("//input[@id='autoPopulate']")).sendKeys("test");
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@id='suggestions']/div"));
 
-        Select select = new Select(automationType);
-        System.out.println("By Default Selected Value: " + select.getFirstSelectedOption().getText());
-//        select.selectByIndex(2);
-//        select.selectByValue("Regression");
-        select.selectByVisibleText("Performance Testing");
-//        select.selectByContainsVisibleText("ance Tes");
+        boolean flag = false;
 
-        System.out.println("Data Selected: " + select.getFirstSelectedOption().getText());
-
-        List<WebElement> dropdownValue = select.getOptions();
-
-        for (WebElement element : dropdownValue) {
-            System.out.println(element.getText());
+        for (WebElement element : elements) {
+            if (element.getText().equals("Regression Test")) {
+                element.click();
+                flag = true;
+                break;
+            }
         }
-        select.isMultiple();
 
-        sleeptime(2);
+        sleeptime(3);
+        if (flag)
+            System.out.println("Test Passed!");
+        else
+            System.out.println("Test Failed!");
         driver.quit();
+
+//
     }
+
 
     static void sleeptime(int sec) {
         try {

@@ -1,17 +1,18 @@
 package org.saddy.Seleniumdemo;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
-import java.util.List;
 
-public class HandlingDropDown {
+public class AlertHandling {
     public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://edu.itinstruct.com");
@@ -23,26 +24,32 @@ public class HandlingDropDown {
         driver.findElement(By.xpath("//button")).click();
         sleeptime(3);
 
-        WebElement automationType = driver.findElement(By.xpath("//select[@id='automationType']"));
+//        driver.findElement(By.xpath("//button[.='Simple Alert']")).click();
+//
+//        sleeptime(2);
+////        driver.switchTo().alert().accept();
+//
+//        Alert alert = driver.switchTo().alert();
+//        System.out.println(alert.getText());
+//        alert.accept();
+//        prompt alert
 
-        Select select = new Select(automationType);
-        System.out.println("By Default Selected Value: " + select.getFirstSelectedOption().getText());
-//        select.selectByIndex(2);
-//        select.selectByValue("Regression");
-        select.selectByVisibleText("Performance Testing");
-//        select.selectByContainsVisibleText("ance Tes");
 
-        System.out.println("Data Selected: " + select.getFirstSelectedOption().getText());
+//        driver.findElement(By.xpath("//button[.='Confirm Alert']")).click();
+//        Alert alert = driver.switchTo().alert();
+//        System.out.println(alert.getText());
+//        alert.dismiss();
 
-        List<WebElement> dropdownValue = select.getOptions();
+        driver.findElement(By.xpath("//button[.='Prompt Alert']")).click();
+        Alert alert = driver.switchTo().alert();
+//        System.out.println(alert.getText());
+        alert.sendKeys("Test Alert");
+        sleeptime(3);
+        alert.accept();
 
-        for (WebElement element : dropdownValue) {
-            System.out.println(element.getText());
-        }
-        select.isMultiple();
-
-        sleeptime(2);
+        sleeptime(3);
         driver.quit();
+
     }
 
     static void sleeptime(int sec) {
